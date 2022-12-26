@@ -37,7 +37,7 @@ app.get('/api/v1/tours/:id', (req, res) => {
   if (id > tours.length) {
     return res.status(404).json({
       status: 'Not found',
-      message: 'Id Invalid'
+      message: 'Id Invalid',
     });
   }
   const tour = tours.find((ele) => ele.id === id);
@@ -45,7 +45,7 @@ app.get('/api/v1/tours/:id', (req, res) => {
   res.status(200).json({
     status: 'success',
     data: {
-      tour
+      tour,
     },
   });
 });
@@ -67,6 +67,23 @@ app.post('/api/v1/tours', (req, res) => {
       });
     }
   );
+});
+
+//update
+app.patch('/api/v1/tours/:id', (req, res) => {
+  const id = req.params.id * 1;
+  if (id > tours.length) {
+    res.status(400).json({
+      status: 'Not found',
+      message: 'ID Invalid',
+    });
+  }
+  res.status(200).json({
+    status: 'success',
+    data: {
+      tour: 'Here Updated Tour....',
+    },
+  });
 });
 
 app.listen(port, () => {
