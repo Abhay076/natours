@@ -25,8 +25,24 @@ exports.getTour = (req, res) => {
   });
 };
 
-exports.createTour = (req, res) => {
+exports.createTour = async (req, res) => {
   // console.log(req.body);
+
+  // const newTour = Tour.create({req.body})
+  try {
+    const newTour = await Tour.create(req.body);
+    res.json({
+      status: 'success',
+      data: {
+        newTour
+      }
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: 'faild',
+      message: err
+    });
+  }
 };
 
 exports.updateTour = (req, res) => {
